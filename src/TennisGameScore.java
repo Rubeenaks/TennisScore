@@ -7,6 +7,9 @@ public class TennisGameScore {
 	String scorePattern;
 	int endOfGame;
 	
+	int currentScoreA;
+	int currentScoreB;
+	
 	
 	TennisGameScore(String scorePattern) {
 		
@@ -14,13 +17,58 @@ public class TennisGameScore {
 		this.scoreB = new ArrayList<Integer> ();
 		
 		endOfGame = 0;
+		currentScoreA = 0;
+		currentScoreB = 0;
+		
 		this.scorePattern = scorePattern;
 		this.scoreA.add(0);
 		this.scoreB.add(0);
 		scorePatternAnalysis(scorePattern);
 	}
 		
-
+	private void updateScore(char winner)
+	{
+		if(winner=='a')
+		{
+			currentScoreA++;
+		}
+		else
+		{
+			currentScoreB++;
+		}
+	}
+	private String getScore()
+	{
+		String score = null;
+		if (Math.abs(currentScoreA - currentScoreB) >=2 && (currentScoreA >= 4 || currentScoreB >= 4)) {
+			if(currentScoreA > currentScoreB)
+			{
+				score += "A";
+			}
+			else
+			{
+				score += "B";
+			}
+			
+			score+= " wins";
+		}
+		else if (currentScoreA < 3 || currentScoreB < 3) {
+			score += getPlayerScore(currentScoreA) + "-" + getPlayerScore(currentScoreB);
+		}
+		else if (currentScoreA == currentScoreB) {
+			score += "Deuce";
+		}
+		else {
+			score+= "Advantage ";
+			if (currentScoreA > currentScoreB)
+				score += "A";
+			else
+				score += "B";
+		}
+		
+		return score;
+	}
+	
 	private void scorePatternAnalysis(String scorepattern) {
 		
 		int scoreA = 0;
@@ -31,8 +79,8 @@ public class TennisGameScore {
 		this.scoreA.add(scoreA);
 		this.scoreB.add(scoreB);
 
-		for(Character c: scorepattern.toCharArray()) {					
-			if(c == 'a')
+		for(Character serviceResult: scorepattern.toCharArray()) {					
+			if(serviceResult == 'a')
 			{
 				scoreA++;
 			}
@@ -63,7 +111,11 @@ public class TennisGameScore {
 		{
 			return (getScore(endOfGame)+" "+getScore(endOfGame-1));
 		}
+		
+		
 	}
+	
+	
 	public String getScore(int time) {
 		
 		if(time >= this.scoreA.size()) {
@@ -112,7 +164,7 @@ public class TennisGameScore {
 	
 	public static void main (String[] args) {
 		TennisGameScore tennisGameScore = new TennisGameScore("aaaba");
-		System.out.println(tennisGameScore.getScoreForGivenInstance(6));
+		System.out.println(tennisGameScore.getScoreForGivenInstance(4));
 		
 	}
 }
