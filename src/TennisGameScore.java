@@ -21,6 +21,8 @@ public class TennisGameScore {
 		
 		this.scoreA = new ArrayList<Integer> ();
 		this.scoreB = new ArrayList<Integer> ();
+		this.scoreA.add(scoreA);
+		this.scoreB.add(scoreB);
 		
 		int timeInstance = 0;
 		
@@ -95,8 +97,8 @@ public class TennisGameScore {
 	}
 	
 	public static void main (String[] args) {
-		TennisGameScore tennisGameScore = new TennisGameScore("aabbabbb");
-		System.out.println(tennisGameScore.getScoreForGivenInstance(3));
+		TennisGameScore tennisGameScore = new TennisGameScore("aaaba");
+		System.out.println(tennisGameScore.getScoreForGivenInstance(5));
 		
 	}
 }
