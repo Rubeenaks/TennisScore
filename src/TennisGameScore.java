@@ -1,52 +1,51 @@
 import java.util.ArrayList;
 
-public class GameScorer {
+public class TennisGameScore {
 	
 	ArrayList <Integer> scoreA;
 	ArrayList <Integer> scoreB;
-	String gamePattern;
+	String gameScorePattern;
 	int lastIndex;
 	
-	GameScorer()
+	TennisGameScore()
 	{
 		lastIndex=0;
-		gamePattern=null;
+		gameScorePattern=null;
 	}
 	
-	GameScorer(String gamePattern)
+	TennisGameScore(String gameScorePattern)
 	{
-		lastIndex= gamePattern.length();
-		this.gamePattern = gamePattern;
-		resultAnalysis(gamePattern);
+		lastIndex= gameScorePattern.length();
+		this.gameScorePattern = gameScorePattern;
+		scorePatternAnalysis(gameScorePattern);
 	}
 	
 	
-	void resultAnalysis(String scorepattern) {
+	void scorePatternAnalysis(String scorepattern) {
 		
 		int scoreA = 0;
 		int scoreB = 0;
-		
-	
 		
 		this.scoreA = new ArrayList<Integer> ();
 		this.scoreB = new ArrayList<Integer> ();
 		
 		int countScore = 0;
 		int step =0;
+		
 		for(Character c: scorepattern.toCharArray()) {
-			
-			
+					
 			if(c == 'a')
+			{
 				scoreA++;
+			}
 			else
+			{
 				scoreB++;
-			
+			}
 			this.scoreA.add(scoreA);
 			this.scoreB.add(scoreB);
 			
-			System.out.println(getScore(countScore++));
-			
-			if(getScore(step).contains("wins"))
+			if(getScoreForGivenInstance(step).contains("wins"))
 			{
 				lastIndex = step;
 				break;
@@ -54,22 +53,16 @@ public class GameScorer {
 			step++;
 			
 		}
-		
 	}
 	
-	String getPlayerScore(int x) {
-		final String[] arr = {"0", "15", "30", "40"};
-		return arr[x];
-	}
-	
-	public String getScore(int n) {
+	public String getScoreForGivenInstance(int n) {
 		
 		if(n >= this.scoreA.size())
 			n = this.scoreA.size() - 1;
 		
 		if(lastIndex<n)
 		{
-			return getScore(lastIndex);
+			return getScoreForGivenInstance(lastIndex);
 		}
 		
 		int scoreA = this.scoreA.get(n);
@@ -103,12 +96,14 @@ public class GameScorer {
 		
 	}
 	
-	
+	String getPlayerScore(int x) {
+		final String[] arr = {"0", "15", "30", "40"};
+		return arr[x];
+	}
 	
 	public static void main (String[] args) {
-		GameScorer gs = new GameScorer("abaaabbbbbbb");
-		
-		System.out.println(gs.getScore(17));
+		TennisGameScore tennisGameScore = new TennisGameScore("abaaabbbbbbb");
+		System.out.println(tennisGameScore.getScoreForGivenInstance(3));
 		
 	}
 }
