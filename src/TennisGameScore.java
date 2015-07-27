@@ -52,19 +52,19 @@ public class TennisGameScore {
 	}
 	
 	
-	public String getresultOfgame(int time)
+	public String getScoreForGivenInstance(int time)
 	{
 		String result = "";
 		if(time<=endOfGame)
 		{
-			return getScoreForGivenInstance(time);
+			return getScore(time);
 		}
 		else
 		{
-			return (getScoreForGivenInstance(endOfGame)+" "+getScoreForGivenInstance(endOfGame-1));
+			return (getScore(endOfGame)+" "+getScore(endOfGame-1));
 		}
 	}
-	public String getScoreForGivenInstance(int time) {
+	public String getScore(int time) {
 		
 		if(time >= this.scoreA.size()) {
 			time = this.scoreA.size() - 1;
@@ -111,8 +111,8 @@ public class TennisGameScore {
 	}
 	
 	public static void main (String[] args) {
-		TennisGameScore tennisGameScore = new TennisGameScore("aaababbbbbbbb");
-		System.out.println(tennisGameScore.getresultOfgame(6));
+		TennisGameScore tennisGameScore = new TennisGameScore("aaaba");
+		System.out.println(tennisGameScore.getScoreForGivenInstance(6));
 		
 	}
 }
