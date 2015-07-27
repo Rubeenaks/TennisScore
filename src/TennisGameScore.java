@@ -24,6 +24,11 @@ public class TennisGameScore {
 		int scoreA = 0;
 		int scoreB = 0;
 
+		this.scoreA = new ArrayList<Integer> ();
+		this.scoreB = new ArrayList<Integer> ();
+		this.scoreA.add(scoreA);
+		this.scoreB.add(scoreB);
+
 		for(Character c: scorepattern.toCharArray()) {					
 			if(c == 'a')
 			{
