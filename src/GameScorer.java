@@ -21,12 +21,12 @@ public class GameScorer {
 	}
 	
 	
-	String resultAnalysis(String scorepattern) {
+	void resultAnalysis(String scorepattern) {
 		
 		int scoreA = 0;
 		int scoreB = 0;
 		
-		String resultofGame = null;
+	
 		
 		this.scoreA = new ArrayList<Integer> ();
 		this.scoreB = new ArrayList<Integer> ();
@@ -55,7 +55,6 @@ public class GameScorer {
 			
 		}
 		
-		return resultofGame;
 	}
 	
 	String getPlayerScore(int x) {
@@ -104,8 +103,12 @@ public class GameScorer {
 		
 	}
 	
+	
+	
 	public static void main (String[] args) {
 		GameScorer gs = new GameScorer("abaaabbbbbbb");
+		
+		System.out.println(gs.getScore(17));
 		
 	}
 }
