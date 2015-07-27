@@ -5,6 +5,7 @@ public class TennisGameScore {
 	ArrayList <Integer> scoreA;
 	ArrayList <Integer> scoreB;
 	String scorePattern;
+	int endOfGame;
 	
 	
 	TennisGameScore(String scorePattern) {
@@ -12,13 +13,14 @@ public class TennisGameScore {
 		this.scoreA = new ArrayList<Integer> ();
 		this.scoreB = new ArrayList<Integer> ();
 		
-		
+		endOfGame = 0;
 		this.scorePattern = scorePattern;
 		this.scoreA.add(0);
 		this.scoreB.add(0);
 		scorePatternAnalysis(scorePattern);
 	}
 		
+
 	private void scorePatternAnalysis(String scorepattern) {
 		
 		int scoreA = 0;
@@ -40,19 +42,35 @@ public class TennisGameScore {
 			}
 			this.scoreA.add(scoreA);
 			this.scoreB.add(scoreB);
+			if(getScoreForGivenInstance(endOfGame).contains("wins"))
+			{
+				break;
+			}
+			endOfGame++;
 			
 		}
 	}
 	
 	
-	
+	public String getresultOfgame(int time)
+	{
+		String result = "";
+		if(time<=endOfGame)
+		{
+			return getScoreForGivenInstance(time);
+		}
+		else
+		{
+			return (getScoreForGivenInstance(endOfGame)+" "+getScoreForGivenInstance(endOfGame-1));
+		}
+	}
 	public String getScoreForGivenInstance(int time) {
 		
 		if(time >= this.scoreA.size()) {
 			time = this.scoreA.size() - 1;
 		}
 		
-		
+	
 		int scoreA = this.scoreA.get(time);
 		int scoreB = this.scoreB.get(time);
 		
@@ -93,8 +111,8 @@ public class TennisGameScore {
 	}
 	
 	public static void main (String[] args) {
-		TennisGameScore tennisGameScore = new TennisGameScore("aaaba");
-		System.out.println(tennisGameScore.getScoreForGivenInstance(6));
+		TennisGameScore tennisGameScore = new TennisGameScore("aaababbbbbbbb");
+		System.out.println(tennisGameScore.getresultOfgame(6));
 		
 	}
 }
