@@ -32,4 +32,17 @@ public class TestTennisGameScorer {
 		assertEquals("A wins 40-15",tennisGameScore.getScoreForGivenInstance(6));
 	}
 	
+	@Test
+	public void TestGameScoreWhenAdvantage()
+	{
+		TennisGameScore tennisGameScore = new TennisGameScore("bbbaaab");
+		assertEquals("Advantage B",tennisGameScore.getScoreForGivenInstance(7));
+	}
+	
+	@Test
+	public void TestGameScoreWhenDeuce()
+	{
+		TennisGameScore tennisGameScore = new TennisGameScore("aaabbb");
+		assertEquals("Deuce",tennisGameScore.getScoreForGivenInstance(6));
+	}
 }
